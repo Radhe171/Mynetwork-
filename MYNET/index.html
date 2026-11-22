@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RadheNet – Manage People. Organize Connections. Build Relationships.">
+    <title>RadheNet — Personal Network Manager</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+
+        <a class="brand" href="#" data-page="dashboard">
+            <span class="brand-mark">R</span>
+            <span class="brand-text">
+                <strong>RadheNet</strong>
+                <small>Personal Network Manager</small>
+            </span>
+        </a>
+
+        <nav class="nav">
+            <p class="nav-label">MENU</p>
+
+            <button class="nav-link active" data-page="dashboard">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="nav-link" data-page="contacts">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M17 11a3 3 0 1 0 0-6M22 21c0-3-2-5.500-5-6.500"/></svg>
+                <span>All Contacts</span>
+                <b class="count-pill" id="navContactCount">0</b>
+            </button>
+
+            <button class="nav-link" data-page="favorites">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.200-8-11a4.500 4.500 0 0 1 8-2.800A4.500 4.500 0 0 1 20 10c0 5.800-8 11-8 11z"/></svg>
+                <span>Favorites</span>
+            </button>
+
+            <button class="nav-link" data-page="categories">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                <span>Categories</span>
+            </button>
+
+            <button class="nav-link" data-page="settings">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.400 15a1.700 1.700 0 0 0 .3 1.800l.1.100a2 2 0 1 1-2.800 2.800l-.1-.1a1.700 1.700 0 0 0-1.800-.3 1.700 1.700 0 0 0-1 1.500V21a2 2 0 1 1-4 0v-.1a1.700 1.700 0 0 0-1.100-1.500 1.700 1.700 0 0 0-1.800.3l-.1.100a2 2 0 1 1-2.800-2.800l.1-.1a1.700 1.700 0 0 0 .3-1.800 1.700 1.700 0 0 0-1.500-1H3a2 2 0 1 1 0-4h.1a1.700 1.700 0 0 0 1.500-1.100 1.700 1.700 0 0 0-.3-1.800l-.1-.1a2 2 0 1 1 2.800-2.800l.1.100a1.700 1.700 0 0 0 1.800.3H9a1.700 1.700 0 0 0 1-1.500V3a2 2 0 1 1 4 0v.1a1.700 1.700 0 0 0 1 1.500 1.700 1.700 0 0 0 1.800-.3l.1-.1a2 2 0 1 1 2.800 2.800l-.1.100a1.700 1.700 0 0 0-.3 1.800V9a1.700 1.700 0 0 0 1.500 1H21a2 2 0 1 1 0 4h-.1a1.700 1.700 0 0 0-1.500 1z"/></svg>
+                <span>Settings</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-card">
+            <strong>Grow your circle</strong>
+            <p>Every relationship starts with one saved contact.</p>
+            <button class="btn btn-light" id="helpAdd">＋ Add contact</button>
+        </div>
+
+        <div class="sidebar-user">
+            <div class="user-avatar">R</div>
+            <div>
+                <strong>Radhe</strong>
+                <small>Personal workspace</small>
+            </div>
+        </div>
+    </aside>
+
+
+    <!-- ===================== MAIN ===================== -->
+    <div class="main">
+
+        <header class="topbar">
+
+            <button class="icon-btn menu-btn" id="mobileMenu" aria-label="Toggle menu">☰</button>
+
+            <div class="welcome">
+                <small id="todayLabel"></small>
+                <h1 id="greeting">Welcome, Radhe 👋</h1>
+            </div>
+
+            <label class="search-box" for="globalSearch">
+                <span aria-hidden="true">⌕</span>
+                <input id="globalSearch" type="search" placeholder="Search contacts…  (Enter)" autocomplete="off">
+                <kbd>Ctrl K</kbd>
+            </label>
+
+            <div class="top-actions">
+                <button class="icon-btn" id="notificationBtn" aria-label="Notifications">🔔<i class="ping"></i></button>
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">☾</button>
+                <button class="btn btn-primary hide-sm" id="quickAdd">＋ Add contact</button>
+                <div class="user-avatar small" title="Radhe">R</div>
+            </div>
+        </header>
+
+        <main class="content">
+            <h2 class="page-title-bar" id="pageTitle">Dashboard</h2>
+            <div id="pageContent"></div>
+        </main>
+
+        <footer class="footer">
+            <strong>RadheNet</strong> · Manage People. Organize Connections. Build Relationships.
+        </footer>
+    </div>
+</div>
+
+
+<!-- ===================== DASHBOARD TEMPLATE ===================== -->
+<template id="dashboardTemplate">
+
+    <section class="hero-card">
+        <div>
+            <span class="eyebrow">YOUR NETWORK</span>
+            <h2>Manage People. Organize Connections. Build Relationships.</h2>
+            <p>Keep every person, note and conversation in one beautiful place.</p>
+        </div>
+        <button class="btn btn-light" data-add>＋ Quick add contact</button>
+    </section>
+
+    <section class="stats-grid" aria-label="Statistics">
+        <article class="stat-card">
+            <span class="stat-icon c1">👥</span>
+            <div><small>Total contacts</small><strong id="totalContacts">0</strong></div>
+        </article>
+        <article class="stat-card">
+            <span class="stat-icon c2">🗂</span>
+            <div><small>Categories</small><strong id="totalCategories">0</strong></div>
+        </article>
+        <article class="stat-card">
+            <span class="stat-icon c3">♥</span>
+            <div><small>Favorites</small><strong id="totalFavorites">0</strong></div>
+        </article>
+        <article class="stat-card">
+            <span class="stat-icon c4">✦</span>
+            <div><small>Added this month</small><strong id="addedMonth">0</strong></div>
+        </article>
+    </section>
+
+    <section class="dash-grid">
+
+        <div class="panel">
+            <div class="panel-heading">
+                <div><h3>Recently added</h3><p>Your newest connections.</p></div>
+                <button class="link-btn" data-page="contacts">View all →</button>
+            </div>
+            <div id="recentContacts"></div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <div><h3>Contact overview</h3><p>People per category.</p></div>
+                <button class="link-btn" data-page="categories">Manage →</button>
+            </div>
+            <div id="categoryOverview"></div>
+        </div>
+
+        <div class="panel wide">
+            <div class="panel-heading">
+                <div><h3>Recent activity</h3><p>What changed lately.</p></div>
+            </div>
+            <div id="activityList"></div>
+        </div>
+
+    </section>
+</template>
+
+
+<!-- ===================== CONTACT MODAL (ADD / EDIT) ===================== -->
+<div class="modal-backdrop" id="contactModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+        <div class="modal-header">
+            <h3 id="modalTitle">Add a contact</h3>
+            <button class="icon-btn" data-close="contactModal" aria-label="Close">✕</button>
+        </div>
+
+        <form id="contactForm" novalidate>
+            <input type="hidden" id="contactId">
+
+            <div class="form-grid">
+
+                <div class="field full">
+                    <label for="fullName">Full name *</label>
+                    <input id="fullName" type="text" placeholder="e.g. Aarav Sharma" required>
+                </div>
+
+                <div class="field">
+                    <label for="phone">Phone</label>
+                    <input id="phone" type="tel" placeholder="+91 98765 43210">
+                </div>
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" placeholder="name@example.com">
+                </div>
+
+                <div class="field">
+                    <label for="company">Company / organization</label>
+                    <input id="company" type="text" placeholder="Where do they work?">
+                </div>
+
+                <div class="field">
+                    <label for="category">Category</label>
+                    <select id="category"></select>
+                </div>
+
+                <div class="field full">
+                    <label for="address">Address / location</label>
+                    <input id="address" type="text" placeholder="City, Country">
+                </div>
+
+                <div class="field full">
+                    <label for="photo">Profile picture URL</label>
+                    <input id="photo" type="url" placeholder="https://…  (optional)">
+                </div>
+
+                <div class="field full">
+                    <label for="notes">Personal notes</label>
+                    <textarea id="notes" rows="3" placeholder="How did you meet? What matters to them?"></textarea>
+                </div>
+
+                <label class="check full" for="isFavorite">
+                    <input type="checkbox" id="isFavorite">
+                    <span>♥ Mark as favorite</span>
+                </label>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-quiet" data-close="contactModal">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveContactBtn">Save contact</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- ===================== DETAIL MODAL ===================== -->
+<div class="modal-backdrop" id="detailModal" aria-hidden="true">
+    <div class="modal modal-wide" role="dialog" aria-modal="true" aria-labelledby="detailName">
+        <button class="icon-btn modal-x" data-close="detailModal" aria-label="Close">✕</button>
+        <div id="detailHero"></div>
+        <div id="detailBody"></div>
+    </div>
+</div>
+
+
+<!-- ===================== CATEGORY MODAL ===================== -->
+<div class="modal-backdrop" id="categoryModal" aria-hidden="true">
+    <div class="modal modal-small" role="dialog" aria-modal="true" aria-labelledby="categoryModalTitle">
+
+        <div class="modal-header">
+            <h3 id="categoryModalTitle">Add category</h3>
+            <button class="icon-btn" data-close="categoryModal" aria-label="Close">✕</button>
+        </div>
+
+        <form id="categoryForm" novalidate>
+            <input type="hidden" id="categoryOriginal">
+
+            <div class="field">
+                <label for="categoryName">Category name</label>
+                <input id="categoryName" type="text" maxlength="30" placeholder="e.g. Mentors">
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-quiet" data-close="categoryModal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save category</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Toast notifications -->
+<div class="toast-region" id="toastRegion" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
